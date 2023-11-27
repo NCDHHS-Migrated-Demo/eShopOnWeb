@@ -33,7 +33,7 @@ jobs:
         path: publish_output
 
   IIS:
-    runs-on: self-hosted, IIS_POC
+    runs-on: [self-hosted, IIS_POC]
     needs: Build
     environment: IIS
     steps:

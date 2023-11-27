@@ -40,7 +40,8 @@ jobs:
     steps:
     - uses: actions/download-artifact@v3
       with:
-        name: publish_output    
+        name: publish_output
+        path: publish_output    
     - name: Deploy to IIS
       run: |
         iisreset /stop

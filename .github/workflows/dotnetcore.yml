@@ -33,10 +33,14 @@ jobs:
         path: ./src/Web/publish_output
 
   IIS:
-    runs-on: [IIS_POC]
+    runs-on:
+      group: IIS_POC
     needs: build
     environment: IIS
     steps:
+    - uses: actions/download-artifact@v3
+      with:
+        name: publish_output    
     - name: Deploy to IIS
       run: |
         iisreset /stop

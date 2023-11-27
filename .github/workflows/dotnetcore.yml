@@ -24,7 +24,7 @@ jobs:
       run: dotnet test ./eShopOnWeb.sln --configuration Release
 
     - name: Publish
-      run: dotnet publish ./eShopOnWeb.sln --no-build --configuration Release --property:PublishDir='./publish_output'
+      run: dotnet publish ./Web.csproj --no-build --configuration Release --property:PublishDir='./publish_output'
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2

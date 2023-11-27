@@ -1,6 +1,8 @@
-name: eShopOnWeb Build and Test
+name: eShopOnWeb Build and Deploy IIS
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+    branches: [main, feature/*]
 
 jobs:
   build:
@@ -20,3 +22,23 @@ jobs:
     
     - name: Test with dotnet
       run: dotnet test ./eShopOnWeb.sln --configuration Release
+
+    - name: Publish
+      run: dotnet publish --no-build --configuration Release --output ./publish_output
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: publish_output
+        path: publish_output
+
+    IIS:
+      runs-on: self-hosted, IIS_POC
+      needs: Build
+      environment: IIS
+      steps:
+      - name: Deploy to IIS
+        run: |
+          iisreset /stop
+          Copy-Item ./publish_output/* C:/inetpub/wwwroot/SampleCRM -Recurse -Force
+          iisreset /start

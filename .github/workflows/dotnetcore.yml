@@ -30,7 +30,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: publish_output
-        path: publish_output
+        path: ./src/Web/publish_output
 
   IIS:
     runs-on: [self-hosted, IIS_POC]

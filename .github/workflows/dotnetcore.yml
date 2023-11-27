@@ -38,15 +38,10 @@ jobs:
     needs: build
 
     environment: IIS
-    
-    steps:
-    - uses: actions/download-artifact@v3
-      with:
-        name: publish_output
-        path: publish_output
 
+    steps:
     - name: Deploy to IIS
       run: |
         iisreset /stop
-        Copy-Item ./publish_output/* C:/inetpub/wwwroot/SampleCRM -Recurse -Force
+        Copy-Item ./publish_output/wwwroot/* C:/inetpub/wwwroot -Recurse -Force
         iisreset /start

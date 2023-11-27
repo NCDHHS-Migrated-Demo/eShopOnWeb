@@ -33,8 +33,8 @@ jobs:
         path: ./src/Web/publish_output
 
   IIS:
-    runs-on: [self-hosted, IIS_POC]
-    needs: Build
+    runs-on: [IIS_POC]
+    needs: build
     environment: IIS
     steps:
     - name: Deploy to IIS
